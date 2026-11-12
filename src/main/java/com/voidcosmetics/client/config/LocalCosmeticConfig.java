@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
+import java.util.Locale;
 
 /** Stores the selected cosmetic on this computer only. */
 public final class LocalCosmeticConfig {
@@ -34,10 +35,11 @@ public final class LocalCosmeticConfig {
         try (var reader = Files.newBufferedReader(FILE, StandardCharsets.UTF_8)) {
             properties.load(reader);
             selected = CosmeticType.valueOf(
-                    properties.getProperty("selected", "NONE").trim().toUpperCase()
+                    properties.getProperty("selected", "NONE").trim().toUpperCase(Locale.ROOT)
             );
         } catch (IOException | IllegalArgumentException exception) {
             selected = CosmeticType.NONE;
+            save();
         }
     }
 
