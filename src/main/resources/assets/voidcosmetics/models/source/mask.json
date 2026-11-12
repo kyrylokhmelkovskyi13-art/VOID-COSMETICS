@@ -1,0 +1,61 @@
+{
+  "format": "void-cosmetics-model",
+  "formatVersion": 1,
+  "units": "player_model_units",
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "description": "Original VOID COSMETICS source geometry draft; conversion to the runtime renderer is pending.",
+  "name": "raven_mask",
+  "parts": [
+    {
+      "name": "mask_plate",
+      "parent": "head",
+      "pivot": [
+        0,
+        0,
+        -4
+      ],
+      "cubes": [
+        {
+          "origin": [
+            -4,
+            -3,
+            -1
+          ],
+          "size": [
+            8,
+            5,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "beak",
+      "parent": "mask_plate",
+      "primitives": [
+        {
+          "type": "tapered_prism",
+          "from": [
+            0,
+            0,
+            -1
+          ],
+          "to": [
+            0,
+            2,
+            -5
+          ],
+          "width": 2
+        }
+      ]
+    }
+  ],
+  "material": {
+    "tint": "#24212C",
+    "accent": "#A84C3E"
+  }
+}
