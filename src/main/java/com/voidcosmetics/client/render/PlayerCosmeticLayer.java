@@ -106,12 +106,16 @@ public final class PlayerCosmeticLayer extends RenderLayer<AvatarRenderState, Pl
 
     private static void box(VertexConsumer v,PoseStack.Pose p,float x1,float y1,float z1,
                             float x2,float y2,float z2,int color) {
-        face(v,p,color,x1,y1,z1,x1,y2,z1,x2,y2,z1,x2,y1,z1);
-        face(v,p,color,x1,y1,z2,x2,y1,z2,x2,y2,z2,x1,y2,z2);
-        face(v,p,color,x1,y1,z1,x1,y1,z2,x1,y2,z2,x1,y2,z1);
-        face(v,p,color,x2,y1,z1,x2,y2,z1,x2,y2,z2,x2,y1,z2);
-        face(v,p,color,x1,y2,z1,x1,y2,z2,x2,y2,z2,x2,y2,z1);
-        face(v,p,color,x1,y1,z1,x2,y1,z1,x2,y1,z2,x1,y1,z2);
+        // Normalize mirrored bounds so both left and right accessories keep consistent face winding.
+        float minX=Math.min(x1,x2), maxX=Math.max(x1,x2);
+        float minY=Math.min(y1,y2), maxY=Math.max(y1,y2);
+        float minZ=Math.min(z1,z2), maxZ=Math.max(z1,z2);
+        face(v,p,color,minX,minY,minZ,minX,maxY,minZ,maxX,maxY,minZ,maxX,minY,minZ);
+        face(v,p,color,minX,minY,maxZ,maxX,minY,maxZ,maxX,maxY,maxZ,minX,maxY,maxZ);
+        face(v,p,color,minX,minY,minZ,minX,minY,maxZ,minX,maxY,maxZ,minX,maxY,minZ);
+        face(v,p,color,maxX,minY,minZ,maxX,maxY,minZ,maxX,maxY,maxZ,maxX,minY,maxZ);
+        face(v,p,color,minX,maxY,minZ,minX,maxY,maxZ,maxX,maxY,maxZ,maxX,maxY,minZ);
+        face(v,p,color,minX,minY,minZ,maxX,minY,minZ,maxX,minY,maxZ,minX,minY,maxZ);
     }
     private static void face(VertexConsumer v,PoseStack.Pose p,int color,
                              float ax,float ay,float az,float bx,float by,float bz,
