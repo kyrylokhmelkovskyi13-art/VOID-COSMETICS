@@ -4,17 +4,75 @@
   "cosmetics": [
     {
       "id": "demonic_wings",
+      "name": "Demonic Wings",
       "category": "wings",
       "model": "voidcosmetics:models/source/demonic_wings.json",
       "texture": "voidcosmetics:textures/cosmetics/demonic_wings.png",
-      "status": "source_draft"
+      "status": "source_draft",
+      "rendered": false
     },
     {
       "id": "angel_wings",
+      "name": "Angel Wings",
       "category": "wings",
       "model": "voidcosmetics:models/source/angel_wings.json",
       "texture": "voidcosmetics:textures/cosmetics/angel_wings.png",
-      "status": "source_draft"
+      "status": "source_draft",
+      "rendered": false
+    },
+    {
+      "id": "obsidian_horns",
+      "name": "Obsidian Horns",
+      "category": "head",
+      "model": "voidcosmetics:models/source/obsidian_horns.json",
+      "texture": "voidcosmetics:textures/cosmetics/obsidian_horns.png",
+      "status": "source_draft",
+      "rendered": false
+    },
+    {
+      "id": "sunlit_halo",
+      "name": "Sunlit Halo",
+      "category": "head",
+      "model": "voidcosmetics:models/source/sunlit_halo.json",
+      "texture": "voidcosmetics:textures/cosmetics/sunlit_halo.png",
+      "status": "source_draft",
+      "rendered": false
+    },
+    {
+      "id": "void_crown",
+      "name": "Void Crown",
+      "category": "head",
+      "model": "voidcosmetics:models/source/void_crown.json",
+      "texture": "voidcosmetics:textures/cosmetics/void_crown.png",
+      "status": "source_draft",
+      "rendered": false
+    },
+    {
+      "id": "raven_mask",
+      "name": "Raven Mask",
+      "category": "face",
+      "model": "voidcosmetics:models/source/raven_mask.json",
+      "texture": "voidcosmetics:textures/cosmetics/raven_mask.png",
+      "status": "source_draft",
+      "rendered": false
+    },
+    {
+      "id": "dragon_tail",
+      "name": "Dragon Tail",
+      "category": "body",
+      "model": "voidcosmetics:models/source/dragon_tail.json",
+      "texture": "voidcosmetics:textures/cosmetics/dragon_tail.png",
+      "status": "source_draft",
+      "rendered": false
+    },
+    {
+      "id": "spectral_swords",
+      "name": "Spectral Swords",
+      "category": "back",
+      "model": "voidcosmetics:models/source/spectral_swords.json",
+      "texture": "voidcosmetics:textures/cosmetics/spectral_swords.png",
+      "status": "source_draft",
+      "rendered": false
     }
   ]
 }
