@@ -1,41 +1,28 @@
 # VOID COSMETICS
 
-Client-only fantasy cosmetics project for Minecraft Java 26.2 (Fabric).
+Client-only fantasy cosmetics for Minecraft Java 26.2 (Fabric).
 
-## Design direction
+## First playable prototype scope
 
-The visual style is intended to feel native to Minecraft: crisp pixel shapes, blocky silhouettes, restrained colors, and no smooth plastic-looking accessories.
+- Press **K** to open the local cosmetic wardrobe.
+- Choose one of eight block-shaped accessories: demonic wings, angel wings, obsidian horns, sunlit halo, void crown, raven mask, dragon tail, or spectral swords.
+- The selected cosmetic is saved locally in `config/voidcosmetics.properties`.
+- Accessories are submitted through the Minecraft 26.2 render-layer pipeline.
+- No server component or synchronization is used; other players do not receive the cosmetic data.
 
-Planned cosmetic collection:
-- Demonic and angel wings
-- Obsidian horns, sunlit halo, and void crown
-- Raven mask
-- Dragon tail
-- Spectral swords floating behind the player
+## Visual direction
 
-## Current prototype
+Native Minecraft proportions, crisp cuboid silhouettes, pixel-like color blocks, and restrained fantasy palettes. No smooth plastic-looking meshes.
 
-- Client-only Fabric entrypoint.
-- Press **K** to open the cosmetic wardrobe.
-- The wardrobe has selectable cards for all eight cosmetic types.
-- The selected type is saved locally in `config/voidcosmetics.properties`.
-- The menu does not pause single-player.
-- No server component or synchronization is implemented.
+## Current verification status
 
-## Important limitations
+GitHub Actions confirms that the project compiles and packages a JAR. The new accessory geometry has not yet been visually verified in a running Minecraft client. Treat the current geometry as an early render prototype: attachment offsets, visibility, player model variants, armor overlap, and first-person behavior still need in-game testing and adjustment.
 
-This is still an early prototype, not a finished playable cosmetics release.
-
-- The wardrobe currently selects and saves a cosmetic type; it does not yet render the selected accessory on the player.
-- The model JSON files are original geometry drafts in a neutral project format, not Minecraft runtime models or GeckoLib models.
-- Final pixel-art PNG textures, player attachment rendering, and animations are not implemented yet.
-- Shoulder pets and particle auras remain planned features and are not in the current eight-item prototype.
-
-With local-only mode, other players will not see the cosmetics. The current menu is a local selection/preview shell only.
+The geometry is currently generated in code as colored cuboids. Final pixel-art PNG textures, animated wing movement, cosmetic particles, shoulder pets, and a polished in-game preview are not implemented yet.
 
 ## Build
 
-The GitHub Actions workflow builds the mod with Java 25, Gradle 9.5.1, Fabric Loom 1.17, and the configured Minecraft 26.2 dependencies. Check the Actions tab for the exact result and downloadable build artifact.
+The workflow builds with Java 25, Gradle 9.5.1, Fabric Loom 1.17, and the configured Minecraft 26.2 dependencies. Download the JAR from the successful GitHub Actions run.
 
 ## License
 
