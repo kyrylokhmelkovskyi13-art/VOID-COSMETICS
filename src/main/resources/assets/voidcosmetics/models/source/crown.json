@@ -1,0 +1,74 @@
+{
+  "format": "void-cosmetics-model",
+  "formatVersion": 1,
+  "units": "player_model_units",
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "description": "Original VOID COSMETICS source geometry draft; conversion to the runtime renderer is pending.",
+  "name": "void_crown",
+  "parts": [
+    {
+      "name": "crown_band",
+      "parent": "head",
+      "pivot": [
+        0,
+        -7,
+        0
+      ],
+      "cubes": [
+        {
+          "origin": [
+            -4,
+            -2,
+            -4
+          ],
+          "size": [
+            8,
+            2,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "name": "crown_spikes",
+      "parent": "crown_band",
+      "primitives": [
+        {
+          "type": "spike",
+          "at": [
+            -3,
+            -2,
+            0
+          ],
+          "height": 3
+        },
+        {
+          "type": "spike",
+          "at": [
+            0,
+            -2,
+            0
+          ],
+          "height": 4
+        },
+        {
+          "type": "spike",
+          "at": [
+            3,
+            -2,
+            0
+          ],
+          "height": 3
+        }
+      ]
+    }
+  ],
+  "material": {
+    "tint": "#8E62C7",
+    "accent": "#E7C56E"
+  }
+}
