@@ -3,7 +3,6 @@ package com.voidcosmetics.client.screen;
 import com.voidcosmetics.client.VoidCosmeticsClient;
 import com.voidcosmetics.client.config.CosmeticType;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
@@ -14,27 +13,20 @@ public final class CosmeticMenuScreen extends Screen {
             CosmeticType.VOID_CROWN, CosmeticType.RAVEN_MASK,
             CosmeticType.DRAGON_TAIL, CosmeticType.SPECTRAL_SWORDS
     };
-
     private static final String[] NAMES = {
             "Demonic Wings", "Angel Wings", "Obsidian Horns", "Sunlit Halo",
             "Void Crown", "Raven Mask", "Dragon Tail", "Spectral Swords"
     };
-
     private static final String[] DETAILS = {
-            "Dark feathered back cosmetic", "Bright feathered back cosmetic",
-            "Heavy forged head cosmetic", "Floating light ring",
-            "Royal void headpiece", "Shadow face covering",
-            "Scaled dragon tail", "Twin blades floating behind you"
+            "DARK FEATHERS", "PURE LIGHT", "FORGED STONE", "FLOATING GLOW",
+            "ROYAL RELIC", "SHADOW VEIL", "SCALED TAIL", "TWIN BLADES"
     };
-
     private static final int[] COLORS = {
             0xFF9D3B48, 0xFFFFD875, 0xFF8A8A9B, 0xFFFFE9A3,
             0xFF9B70E8, 0xFF68718F, 0xFF4EAA82, 0xFF9C83D8
     };
 
-    private int panelX;
-    private int panelY;
-    private int panelWidth;
+    private int panelX, panelY, panelWidth, cardWidth, startX, startY;
 
     public CosmeticMenuScreen() {
         super(Component.literal("VOID COSMETICS"));
@@ -44,75 +36,85 @@ public final class CosmeticMenuScreen extends Screen {
     protected void init() {
         panelWidth = Math.min(430, this.width - 24);
         panelX = (this.width - panelWidth) / 2;
-        panelY = Math.max(12, (this.height - 330) / 2);
-
-        int gap = 8;
-        int cardWidth = (panelWidth - 44 - gap) / 2;
-        int cardHeight = 54;
-        int startX = panelX + 14;
-        int startY = panelY + 76;
-
-        for (int i = 0; i < ITEMS.length; i++) {
-            final CosmeticType type = ITEMS[i];
-            int col = i % 2;
-            int row = i / 2;
-            int x = startX + col * (cardWidth + gap);
-            int y = startY + row * (cardHeight + 7);
-
-            Button card = Button.builder(Component.empty(), button -> {
-                VoidCosmeticsClient.CONFIG.setSelected(type);
-            }).bounds(x, y, cardWidth, cardHeight).build();
-            this.addRenderableWidget(card);
-        }
-
-        this.addRenderableWidget(Button.builder(Component.literal("UNEQUIP ALL"), button -> {
-            VoidCosmeticsClient.CONFIG.setSelected(CosmeticType.NONE);
-        }).bounds(panelX + 14, panelY + 306, 124, 20).build());
-
-        this.addRenderableWidget(Button.builder(Component.literal("DONE"), button -> onClose())
-                .bounds(panelX + panelWidth - 94, panelY + 306, 80, 20).build());
+        panelY = Math.max(8, (this.height - 372) / 2);
+        cardWidth = (panelWidth - 44 - 8) / 2;
+        startX = panelX + 14;
+        startY = panelY + 70;
     }
 
     @Override
-    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-        super.extractRenderState(graphics, mouseX, mouseY, delta);
-
-        graphics.fill(0, 0, this.width, this.height, 0xA9000000);
-        graphics.fill(panelX, panelY, panelX + panelWidth, panelY + 334, 0xFF171923);
-        graphics.outline(panelX, panelY, panelWidth, 334, 0xFF55516D);
-        graphics.fill(panelX + 1, panelY + 1, panelX + panelWidth - 1, panelY + 3, 0xFF9A72D8);
-
-        graphics.text(this.font, "VOID COSMETICS", panelX + 14, panelY + 12, 0xFFFFFFFF, true);
-        graphics.text(this.font, "YOUR LOOK. YOUR WORLD.", panelX + 15, panelY + 29, 0xFFB8A9D6, false);
-        graphics.text(this.font, "LOCAL ONLY", panelX + panelWidth - 76, panelY + 15, 0xFF83D6A4, true);
-        graphics.fill(panelX + 14, panelY + 53, panelX + panelWidth - 14, panelY + 54, 0xFF454052);
-
-        int cardWidth = (panelWidth - 44 - 8) / 2;
-        int cardHeight = 54;
-        int startX = panelX + 14;
-        int startY = panelY + 76;
+    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+        g.fill(0, 0, this.width, this.height, 0xA9000000);
+        g.fill(panelX, panelY, panelX + panelWidth, panelY + 372, 0xFF171923);
+        g.outline(panelX, panelY, panelWidth, 372, 0xFF55516D);
+        g.fill(panelX + 1, panelY + 1, panelX + panelWidth - 1, panelY + 4, 0xFF9A72D8);
+        g.text(this.font, "VOID COSMETICS", panelX + 14, panelY + 12, 0xFFFFFFFF, true);
+        g.text(this.font, "YOUR LOOK. YOUR WORLD.", panelX + 15, panelY + 29, 0xFFB8A9D6, false);
+        g.text(this.font, "LOCAL ONLY", panelX + panelWidth - 76, panelY + 15, 0xFF83D6A4, true);
+        g.fill(panelX + 14, panelY + 52, panelX + panelWidth - 14, panelY + 53, 0xFF454052);
 
         for (int i = 0; i < ITEMS.length; i++) {
-            int col = i % 2;
-            int row = i / 2;
+            int col = i % 2, row = i / 2;
             int x = startX + col * (cardWidth + 8);
-            int y = startY + row * (cardHeight + 7);
+            int y = startY + row * 58;
             boolean selected = VoidCosmeticsClient.CONFIG.getSelected() == ITEMS[i];
+            boolean hovered = mouseX >= x && mouseX <= x + cardWidth && mouseY >= y && mouseY <= y + 51;
+            int bg = selected ? 0xFF393044 : hovered ? 0xFF30313F : 0xFF242633;
+            g.fill(x, y, x + cardWidth, y + 51, bg);
+            g.outline(x, y, cardWidth, 51, selected ? 0xFFFFD36E : 0xFF484858);
 
-            graphics.fill(x + 3, y + 3, x + 23, y + 23, COLORS[i]);
-            graphics.fill(x + 6, y + 6, x + 20, y + 20, 0xFF20202A);
-            graphics.fill(x + 9, y + 9, x + 17, y + 17, COLORS[i]);
-            graphics.text(this.font, NAMES[i], x + 30, y + 7, selected ? 0xFFFFE29A : 0xFFFFFFFF, true);
-            graphics.text(this.font, DETAILS[i], x + 30, y + 21, 0xFFB5B2C0, false);
-            if (selected) {
-                graphics.outline(x + 1, y + 1, cardWidth - 2, cardHeight - 2, 0xFFFFD36E);
-                graphics.text(this.font, "EQUIPPED", x + 30, y + 36, 0xFFFFD36E, true);
-            } else {
-                graphics.text(this.font, "CLICK TO EQUIP", x + 30, y + 36, 0xFF8F8B9B, false);
-            }
+            // Tiny pixel-art style emblem, deliberately built from crisp squares.
+            g.fill(x + 9, y + 10, x + 29, y + 30, 0xFF11131B);
+            g.fill(x + 13, y + 7, x + 25, y + 33, COLORS[i]);
+            g.fill(x + 7, y + 13, x + 31, y + 25, COLORS[i]);
+            g.fill(x + 15, y + 12, x + 23, y + 28, 0xFF242633);
+            g.text(this.font, NAMES[i], x + 37, y + 8, selected ? 0xFFFFE29A : 0xFFFFFFFF, true);
+            g.text(this.font, DETAILS[i], x + 37, y + 22, 0xFFB5B2C0, false);
+            g.text(this.font, selected ? "EQUIPPED" : "CLICK TO EQUIP",
+                    x + 37, y + 36, selected ? 0xFFFFD36E : 0xFF92909E, true);
         }
 
-        graphics.text(this.font, "Selection is saved on this computer only.", panelX + 14, panelY + 285, 0xFF92909E, false);
+        g.text(this.font, "Your choice is saved locally on this computer.", panelX + 14, panelY + 310, 0xFF92909E, false);
+        int buttonY = panelY + 338;
+        drawButton(g, panelX + 14, buttonY, 124, 20, "UNEQUIP ALL", mouseX, mouseY);
+        drawButton(g, panelX + panelWidth - 94, buttonY, 80, 20, "DONE", mouseX, mouseY);
+        g.text(this.font, "Press ESC to close", panelX + panelWidth / 2 - 42, buttonY + 6, 0xFF777482, false);
+    }
+
+    private void drawButton(GuiGraphicsExtractor g, int x, int y, int w, int h, String label, int mx, int my) {
+        boolean hovered = mx >= x && mx <= x + w && my >= y && my <= y + h;
+        g.fill(x, y, x + w, y + h, hovered ? 0xFF66518A : 0xFF393545);
+        g.outline(x, y, w, h, hovered ? 0xFFD9B8FF : 0xFF777184);
+        int textX = x + (w - this.font.width(label)) / 2;
+        g.text(this.font, label, textX, y + 6, 0xFFFFFFFF, true);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button != 0) return super.mouseClicked(mouseX, mouseY, button);
+        int mx = (int) mouseX, my = (int) mouseY;
+        int buttonY = panelY + 338;
+        if (inside(mx, my, panelX + 14, buttonY, 124, 20)) {
+            VoidCosmeticsClient.CONFIG.setSelected(CosmeticType.NONE);
+            return true;
+        }
+        if (inside(mx, my, panelX + panelWidth - 94, buttonY, 80, 20)) {
+            onClose();
+            return true;
+        }
+        for (int i = 0; i < ITEMS.length; i++) {
+            int x = startX + (i % 2) * (cardWidth + 8);
+            int y = startY + (i / 2) * 58;
+            if (inside(mx, my, x, y, cardWidth, 51)) {
+                VoidCosmeticsClient.CONFIG.setSelected(ITEMS[i]);
+                return true;
+            }
+        }
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    private boolean inside(int mx, int my, int x, int y, int w, int h) {
+        return mx >= x && mx <= x + w && my >= y && my <= y + h;
     }
 
     @Override
