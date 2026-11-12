@@ -48,24 +48,76 @@ public final class PlayerCosmeticLayer extends RenderLayer<AvatarRenderState, Pl
     // Coordinates below are block units relative to the selected model part.
     // Head local origin is at the neck; negative Y points upward and negative Z faces forward.
     private static void wings(PoseStack s, SubmitNodeCollector c, ModelPart body, boolean angel) {
-        int base=angel?0xFFFFE7A0:0xFF4A1734;
-        int a=angel?0xFFFFD86B:0xFF6B173F;
-        int b=angel?0xFFFFF2C2:0xFFB52C52;
-        int edge=angel?0xFFFFFFFF:0xFF241027;
+        int root = angel ? 0xFFFFE8AE : 0xFF321126;
+        int shadow = angel ? 0xFFD8A94F : 0xFF190B20;
+        int[] featherColors = angel
+                ? new int[]{0xFFFFF8DE,0xFFF4E5BD,0xFFFFD978,0xFFE8C77E}
+                : new int[]{0xFF9D294D,0xFF6E1B3C,0xFF42132F,0xFFCB4561};
         draw(s,c,body,(v,p)->{
-            // A shared back plate keeps both wings visibly attached to the torso.
-            box(v,p,-.24F,-.16F,.10F,.24F,.12F,.23F,base);
-            for(int side:new int[]{-1,1}) {
-                // Overlapping stepped feathers form one continuous wing silhouette.
-                box(v,p,side*.10F,-.12F,.12F,side*.34F,.12F,.24F,edge);
-                box(v,p,side*.22F,-.20F,.13F,side*.52F,.08F,.235F,a);
-                box(v,p,side*.36F,-.30F,.14F,side*.68F,.00F,.23F,b);
-                box(v,p,side*.50F,-.40F,.145F,side*.82F,-.10F,.225F,a);
-                box(v,p,side*.62F,-.47F,.15F,side*.91F,-.20F,.22F,b);
-                // Lower feather overlaps the middle section instead of floating below it.
-                box(v,p,side*.36F,-.26F,.145F,side*.70F,-.08F,.235F,edge);
+            // Compact central harness, hidden mostly behind the torso.
+            box(v,p,-.19F,-.17F,.13F,.19F,.18F,.29F,root);
+            for (int side : new int[]{-1,1}) {
+                // Dark inner membrane ties the feather groups into one wing.
+                wingMembrane(v,p,side,shadow);
+                // Long outer flight feathers fan upward and outward.
+                feather(v,p,side,.13F,-.08F,.48F,-.64F,.105F,.245F,featherColors[0]);
+                feather(v,p,side,.15F,-.04F,.68F,-.56F,.105F,.235F,featherColors[1]);
+                feather(v,p,side,.17F,.00F,.86F,-.43F,.10F,.225F,featherColors[0]);
+                feather(v,p,side,.18F,.04F,.94F,-.25F,.095F,.215F,featherColors[1]);
+                // Shorter lower feathers create a layered, curved lower edge.
+                feather(v,p,side,.14F,.02F,.43F,.22F,.105F,.255F,featherColors[2]);
+                feather(v,p,side,.17F,.04F,.65F,.18F,.095F,.245F,featherColors[1]);
+                feather(v,p,side,.20F,.02F,.79F,.04F,.085F,.235F,featherColors[2]);
+                // Small coverts hide the joins at the wing root.
+                feather(v,p,side,.09F,-.09F,.34F,-.22F,.095F,.275F,featherColors[3]);
+                feather(v,p,side,.11F,.00F,.36F,.08F,.09F,.28F,featherColors[1]);
             }
         });
+    }
+
+    private static void wingMembrane(VertexConsumer v, PoseStack.Pose p, int side, int color) {
+        float x0=side*.10F, x1=side*.39F, x2=side*.72F, x3=side*.90F;
+        // A shallow polygon behind the feathers gives the wing a continuous silhouette.
+        polygon(v,p,color,
+                x0,-.12F,.19F, x1,-.43F,.19F, x2,-.34F,.19F,
+                x3,-.12F,.19F, x2,.12F,.19F, x1,.17F,.19F);
+    }
+
+    /** A tapered, raised feather made from a five-point polygon and a shallow bevel. */
+    private static void feather(VertexConsumer v, PoseStack.Pose p, int side,
+                                float rootX,float rootY,float tipX,float tipY,
+                                float halfWidth,float z,int color) {
+        float rx=side*rootX, tx=side*tipX;
+        float dx=tx-rx, dy=tipY-rootY;
+        float len=(float)Math.sqrt(dx*dx+dy*dy);
+        float nx=-dy/len*halfWidth, ny=dx/len*halfWidth;
+        float mx=(rx+tx)*.5F, my=(rootY+tipY)*.5F;
+        float bx=mx+nx, by=my+ny, cx=mx-nx, cy=my-ny;
+        float tipZ=z-.018F;
+        polygon(v,p,color,
+                rx+nx*.48F,rootY+ny*.48F,z,
+                bx,by,tipZ,
+                tx,tipY,z-.025F,
+                cx,cy,tipZ,
+                rx-nx*.48F,rootY-ny*.48F,z);
+        // Thin dark bevel along the lower edge adds pixel-art depth.
+        triangle(v,p,0x66000000,
+                bx,by,tipZ, tx,tipY,z-.025F, cx,cy,tipZ);
+    }
+
+    private static void polygon(VertexConsumer v, PoseStack.Pose p, int color, float... xyz) {
+        int count=xyz.length/3;
+        for(int i=1;i<count-1;i++) {
+            vertex(v,p,color,xyz[0],xyz[1],xyz[2]);
+            vertex(v,p,color,xyz[i*3],xyz[i*3+1],xyz[i*3+2]);
+            vertex(v,p,color,xyz[(i+1)*3],xyz[(i+1)*3+1],xyz[(i+1)*3+2]);
+        }
+    }
+
+    private static void triangle(VertexConsumer v, PoseStack.Pose p, int color,
+                                 float ax,float ay,float az,float bx,float by,float bz,
+                                 float cx,float cy,float cz) {
+        vertex(v,p,color,ax,ay,az); vertex(v,p,color,bx,by,bz); vertex(v,p,color,cx,cy,cz);
     }
 
     private static void horns(PoseStack s,SubmitNodeCollector c,ModelPart head) {
