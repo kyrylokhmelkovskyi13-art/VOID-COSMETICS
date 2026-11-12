@@ -1,17 +1,42 @@
 # VOID COSMETICS
 
-Client-side cosmetic mod project for Minecraft Java 26.2 (Fabric).
+Client-only fantasy cosmetics project for Minecraft Java 26.2 (Fabric).
 
-## Project goals
-- Local-only cosmetics (no server sync and no server-side installation).
-- Wings, horns, halos, crowns, back swords, masks, shoulder pets, tails and particle auras.
-- In-game cosmetic menu with preview and locally saved selections.
+## Design direction
 
-## Current status
-This repository is the project starting point. The model files under `assets/models/source/` are original source geometry drafts in the project's neutral JSON format. They are not yet wired into an in-game renderer. Minecraft 26.2 mappings, Fabric API and the build configuration must be verified before a playable JAR can be claimed.
+The visual style is intended to feel native to Minecraft: crisp pixel shapes, blocky silhouettes, restrained colors, and no smooth plastic-looking accessories.
 
-## Important
-With no synchronization, cosmetics are visible only to the local player. Other players will not see them.
+Planned cosmetic collection:
+- Demonic and angel wings
+- Obsidian horns, sunlit halo, and void crown
+- Raven mask
+- Dragon tail
+- Spectral swords floating behind the player
+
+## Current prototype
+
+- Client-only Fabric entrypoint.
+- Press **K** to open the cosmetic wardrobe.
+- The wardrobe has selectable cards for all eight cosmetic types.
+- The selected type is saved locally in `config/voidcosmetics.properties`.
+- The menu does not pause single-player.
+- No server component or synchronization is implemented.
+
+## Important limitations
+
+This is still an early prototype, not a finished playable cosmetics release.
+
+- The wardrobe currently selects and saves a cosmetic type; it does not yet render the selected accessory on the player.
+- The model JSON files are original geometry drafts in a neutral project format, not Minecraft runtime models or GeckoLib models.
+- Final pixel-art PNG textures, player attachment rendering, and animations are not implemented yet.
+- Shoulder pets and particle auras remain planned features and are not in the current eight-item prototype.
+
+With local-only mode, other players will not see the cosmetics. The current menu is a local selection/preview shell only.
+
+## Build
+
+The GitHub Actions workflow builds the mod with Java 25, Gradle 9.5.1, Fabric Loom 1.17, and the configured Minecraft 26.2 dependencies. Check the Actions tab for the exact result and downloadable build artifact.
 
 ## License
+
 Project code and original assets will receive an explicit license before public release.
