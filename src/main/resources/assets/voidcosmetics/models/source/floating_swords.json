@@ -1,0 +1,60 @@
+{
+  "format": "void-cosmetics-model",
+  "formatVersion": 1,
+  "units": "player_model_units",
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "description": "Original VOID COSMETICS source geometry draft; conversion to the runtime renderer is pending.",
+  "name": "spectral_swords",
+  "parts": [
+    {
+      "name": "left_sword",
+      "parent": "body",
+      "pivot": [
+        -4,
+        10,
+        4
+      ],
+      "primitives": [
+        {
+          "type": "sword",
+          "length": 12,
+          "width": 2,
+          "rotation": [
+            15,
+            0,
+            -20
+          ]
+        }
+      ]
+    },
+    {
+      "name": "right_sword",
+      "parent": "body",
+      "pivot": [
+        4,
+        10,
+        4
+      ],
+      "primitives": [
+        {
+          "type": "sword",
+          "length": 12,
+          "width": 2,
+          "rotation": [
+            -15,
+            0,
+            20
+          ]
+        }
+      ]
+    }
+  ],
+  "material": {
+    "tint": "#9BD7E8",
+    "emissive": true
+  }
+}
