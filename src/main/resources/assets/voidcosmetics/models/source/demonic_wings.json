@@ -1,0 +1,125 @@
+{
+  "format": "void-cosmetics-model",
+  "formatVersion": 1,
+  "name": "demonic_wings",
+  "description": "Original paired demonic wing source mesh draft",
+  "units": "player_model_units",
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "parts": [
+    {
+      "name": "left_wing_root",
+      "parent": "body",
+      "pivot": [
+        -2,
+        11,
+        2
+      ],
+      "cubes": [
+        {
+          "origin": [
+            -3,
+            8,
+            1
+          ],
+          "size": [
+            2,
+            5,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -12
+          ]
+        },
+        {
+          "origin": [
+            -8,
+            10,
+            1
+          ],
+          "size": [
+            6,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -18
+          ]
+        },
+        {
+          "origin": [
+            -13,
+            12,
+            1
+          ],
+          "size": [
+            6,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -25
+          ]
+        },
+        {
+          "origin": [
+            -17,
+            15,
+            1
+          ],
+          "size": [
+            5,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -32
+          ]
+        },
+        {
+          "origin": [
+            -19,
+            18,
+            1
+          ],
+          "size": [
+            3,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -42
+          ]
+        }
+      ]
+    },
+    {
+      "name": "right_wing_root",
+      "parent": "body",
+      "pivot": [
+        2,
+        11,
+        2
+      ],
+      "mirrorOf": "left_wing_root",
+      "mirrorAxis": "x"
+    }
+  ],
+  "material": {
+    "texture": "voidcosmetics:textures/cosmetics/demonic_wings.png",
+    "tint": "#713044"
+  }
+}
