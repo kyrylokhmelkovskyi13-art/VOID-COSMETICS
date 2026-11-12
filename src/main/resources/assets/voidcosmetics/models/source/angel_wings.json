@@ -1,0 +1,125 @@
+{
+  "format": "void-cosmetics-model",
+  "formatVersion": 1,
+  "name": "angel_wings",
+  "description": "Original paired feathered angel wing source mesh draft",
+  "units": "player_model_units",
+  "pivot": [
+    0,
+    0,
+    0
+  ],
+  "parts": [
+    {
+      "name": "left_wing_root",
+      "parent": "body",
+      "pivot": [
+        -2,
+        11,
+        2
+      ],
+      "cubes": [
+        {
+          "origin": [
+            -3,
+            8,
+            1
+          ],
+          "size": [
+            2,
+            5,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -10
+          ]
+        },
+        {
+          "origin": [
+            -7,
+            9,
+            1
+          ],
+          "size": [
+            5,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -15
+          ]
+        },
+        {
+          "origin": [
+            -11,
+            11,
+            1
+          ],
+          "size": [
+            5,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -22
+          ]
+        },
+        {
+          "origin": [
+            -14,
+            14,
+            1
+          ],
+          "size": [
+            5,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -30
+          ]
+        },
+        {
+          "origin": [
+            -16,
+            17,
+            1
+          ],
+          "size": [
+            4,
+            2,
+            2
+          ],
+          "rotation": [
+            0,
+            0,
+            -38
+          ]
+        }
+      ]
+    },
+    {
+      "name": "right_wing_root",
+      "parent": "body",
+      "pivot": [
+        2,
+        11,
+        2
+      ],
+      "mirrorOf": "left_wing_root",
+      "mirrorAxis": "x"
+    }
+  ],
+  "material": {
+    "texture": "voidcosmetics:textures/cosmetics/angel_wings.png",
+    "tint": "#F4EBD3"
+  }
+}
