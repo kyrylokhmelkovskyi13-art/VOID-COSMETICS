@@ -8,8 +8,8 @@
       "category": "wings",
       "model": "voidcosmetics:models/source/demonic_wings.json",
       "texture": "voidcosmetics:textures/cosmetics/demonic_wings.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     },
     {
       "id": "angel_wings",
@@ -17,8 +17,8 @@
       "category": "wings",
       "model": "voidcosmetics:models/source/angel_wings.json",
       "texture": "voidcosmetics:textures/cosmetics/angel_wings.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     },
     {
       "id": "obsidian_horns",
@@ -26,8 +26,8 @@
       "category": "head",
       "model": "voidcosmetics:models/source/obsidian_horns.json",
       "texture": "voidcosmetics:textures/cosmetics/obsidian_horns.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     },
     {
       "id": "sunlit_halo",
@@ -35,8 +35,8 @@
       "category": "head",
       "model": "voidcosmetics:models/source/sunlit_halo.json",
       "texture": "voidcosmetics:textures/cosmetics/sunlit_halo.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     },
     {
       "id": "void_crown",
@@ -44,8 +44,8 @@
       "category": "head",
       "model": "voidcosmetics:models/source/void_crown.json",
       "texture": "voidcosmetics:textures/cosmetics/void_crown.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     },
     {
       "id": "raven_mask",
@@ -53,8 +53,8 @@
       "category": "face",
       "model": "voidcosmetics:models/source/raven_mask.json",
       "texture": "voidcosmetics:textures/cosmetics/raven_mask.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     },
     {
       "id": "dragon_tail",
@@ -62,8 +62,8 @@
       "category": "body",
       "model": "voidcosmetics:models/source/dragon_tail.json",
       "texture": "voidcosmetics:textures/cosmetics/dragon_tail.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     },
     {
       "id": "spectral_swords",
@@ -71,8 +71,8 @@
       "category": "back",
       "model": "voidcosmetics:models/source/spectral_swords.json",
       "texture": "voidcosmetics:textures/cosmetics/spectral_swords.png",
-      "status": "source_draft",
-      "rendered": false
+      "status": "code_geometry_prototype",
+      "rendered": true
     }
   ]
 }
