@@ -2,6 +2,10 @@ package com.voidcosmetics.client;
 
 import com.voidcosmetics.client.config.LocalCosmeticConfig;
 import com.voidcosmetics.client.screen.CosmeticMenuScreen;
+import com.voidcosmetics.client.render.PlayerCosmeticLayer;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.world.entity.EntityTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
@@ -25,6 +29,11 @@ public final class VoidCosmeticsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         CONFIG.load();
+        LivingEntityRenderLayerRegistrationCallback.EVENT.register((entityType, entityRenderer, helper, context) -> {
+            if (entityType == EntityTypes.PLAYER && entityRenderer instanceof AvatarRenderer<?> avatarRenderer) {
+                helper.register(new PlayerCosmeticLayer(avatarRenderer));
+            }
+        });
         openMenuKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.voidcosmetics.open_menu",
                 InputConstants.Type.KEYSYM,
