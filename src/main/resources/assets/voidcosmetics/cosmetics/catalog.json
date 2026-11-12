@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "visibility": "local_only",
+  "cosmetics": [
+    {
+      "id": "demonic_wings",
+      "category": "wings",
+      "model": "voidcosmetics:models/source/demonic_wings.json",
+      "texture": "voidcosmetics:textures/cosmetics/demonic_wings.png",
+      "status": "source_draft"
+    },
+    {
+      "id": "angel_wings",
+      "category": "wings",
+      "model": "voidcosmetics:models/source/angel_wings.json",
+      "texture": "voidcosmetics:textures/cosmetics/angel_wings.png",
+      "status": "source_draft"
+    }
+  ]
+}
