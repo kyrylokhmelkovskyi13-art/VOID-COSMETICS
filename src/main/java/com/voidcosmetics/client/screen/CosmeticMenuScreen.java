@@ -14,13 +14,17 @@ public final class CosmeticMenuScreen extends Screen {
             CosmeticType.VOID_CROWN, CosmeticType.RAVEN_MASK,
             CosmeticType.DRAGON_TAIL, CosmeticType.SPECTRAL_SWORDS
     };
-    private static final String[] NAMES = {
-            "Demonic Wings", "Angel Wings", "Obsidian Horns", "Sunlit Halo",
-            "Void Crown", "Raven Mask", "Dragon Tail", "Spectral Swords"
+    private static final String[] NAME_KEYS = {
+            "cosmetic.voidcosmetics.demonic_wings", "cosmetic.voidcosmetics.angel_wings",
+            "cosmetic.voidcosmetics.obsidian_horns", "cosmetic.voidcosmetics.sunlit_halo",
+            "cosmetic.voidcosmetics.void_crown", "cosmetic.voidcosmetics.raven_mask",
+            "cosmetic.voidcosmetics.dragon_tail", "cosmetic.voidcosmetics.spectral_swords"
     };
-    private static final String[] DETAILS = {
-            "DARK FEATHERS", "PURE LIGHT", "FORGED STONE", "FLOATING GLOW",
-            "ROYAL RELIC", "SHADOW VEIL", "SCALED TAIL", "TWIN BLADES"
+    private static final String[] DETAIL_KEYS = {
+            "cosmetic.voidcosmetics.demonic_wings.detail", "cosmetic.voidcosmetics.angel_wings.detail",
+            "cosmetic.voidcosmetics.obsidian_horns.detail", "cosmetic.voidcosmetics.sunlit_halo.detail",
+            "cosmetic.voidcosmetics.void_crown.detail", "cosmetic.voidcosmetics.raven_mask.detail",
+            "cosmetic.voidcosmetics.dragon_tail.detail", "cosmetic.voidcosmetics.spectral_swords.detail"
     };
     private static final int[] COLORS = {
             0xFF9D3B48, 0xFFFFD875, 0xFF8A8A9B, 0xFFFFE9A3,
@@ -30,8 +34,10 @@ public final class CosmeticMenuScreen extends Screen {
     private int panelX, panelY, panelWidth, cardWidth, startX, startY;
 
     public CosmeticMenuScreen() {
-        super(Component.literal("VOID COSMETICS"));
+        super(Component.translatable("screen.voidcosmetics.title"));
     }
+
+    private Component tr(String key) { return Component.translatable(key); }
 
     @Override
     protected void init() {
@@ -49,9 +55,10 @@ public final class CosmeticMenuScreen extends Screen {
         g.fill(panelX, panelY, panelX + panelWidth, panelY + 372, 0xFF171923);
         g.outline(panelX, panelY, panelWidth, 372, 0xFF55516D);
         g.fill(panelX + 1, panelY + 1, panelX + panelWidth - 1, panelY + 4, 0xFF9A72D8);
-        g.text(this.font, "VOID COSMETICS", panelX + 14, panelY + 12, 0xFFFFFFFF, true);
-        g.text(this.font, "YOUR LOOK. YOUR WORLD.", panelX + 15, panelY + 29, 0xFFB8A9D6, false);
-        g.text(this.font, "LOCAL ONLY", panelX + panelWidth - 76, panelY + 15, 0xFF83D6A4, true);
+        g.text(this.font, tr("screen.voidcosmetics.title"), panelX + 14, panelY + 12, 0xFFFFFFFF, true);
+        g.text(this.font, tr("screen.voidcosmetics.tagline"), panelX + 15, panelY + 29, 0xFFB8A9D6, false);
+        Component localOnly = tr("screen.voidcosmetics.local_only");
+        g.text(this.font, localOnly, panelX + panelWidth - this.font.width(localOnly) - 14, panelY + 15, 0xFF83D6A4, true);
         g.fill(panelX + 14, panelY + 52, panelX + panelWidth - 14, panelY + 53, 0xFF454052);
 
         for (int i = 0; i < ITEMS.length; i++) {
@@ -69,20 +76,21 @@ public final class CosmeticMenuScreen extends Screen {
             g.fill(x + 13, y + 7, x + 25, y + 33, COLORS[i]);
             g.fill(x + 7, y + 13, x + 31, y + 25, COLORS[i]);
             g.fill(x + 15, y + 12, x + 23, y + 28, 0xFF242633);
-            g.text(this.font, NAMES[i], x + 37, y + 8, selected ? 0xFFFFE29A : 0xFFFFFFFF, true);
-            g.text(this.font, DETAILS[i], x + 37, y + 22, 0xFFB5B2C0, false);
-            g.text(this.font, selected ? "EQUIPPED" : "CLICK TO EQUIP",
+            g.text(this.font, tr(NAME_KEYS[i]), x + 37, y + 8, selected ? 0xFFFFE29A : 0xFFFFFFFF, true);
+            g.text(this.font, tr(DETAIL_KEYS[i]), x + 37, y + 22, 0xFFB5B2C0, false);
+            g.text(this.font, tr(selected ? "screen.voidcosmetics.equipped" : "screen.voidcosmetics.click_to_equip"),
                     x + 37, y + 36, selected ? 0xFFFFD36E : 0xFF92909E, true);
         }
 
-        g.text(this.font, "Your choice is saved locally on this computer.", panelX + 14, panelY + 310, 0xFF92909E, false);
+        g.text(this.font, tr("screen.voidcosmetics.local_save"), panelX + 14, panelY + 310, 0xFF92909E, false);
         int buttonY = panelY + 338;
-        drawButton(g, panelX + 14, buttonY, 124, 20, "UNEQUIP ALL", mouseX, mouseY);
-        drawButton(g, panelX + panelWidth - 94, buttonY, 80, 20, "DONE", mouseX, mouseY);
-        g.text(this.font, "Press ESC to close", panelX + panelWidth / 2 - 42, buttonY + 6, 0xFF777482, false);
+        drawButton(g, panelX + 14, buttonY, 124, 20, tr("screen.voidcosmetics.unequip_all"), mouseX, mouseY);
+        drawButton(g, panelX + panelWidth - 94, buttonY, 80, 20, tr("screen.voidcosmetics.done"), mouseX, mouseY);
+        Component esc = tr("screen.voidcosmetics.press_esc");
+        g.text(this.font, esc, panelX + (panelWidth - this.font.width(esc)) / 2, buttonY + 6, 0xFF777482, false);
     }
 
-    private void drawButton(GuiGraphicsExtractor g, int x, int y, int w, int h, String label, int mx, int my) {
+    private void drawButton(GuiGraphicsExtractor g, int x, int y, int w, int h, Component label, int mx, int my) {
         boolean hovered = mx >= x && mx <= x + w && my >= y && my <= y + h;
         g.fill(x, y, x + w, y + h, hovered ? 0xFF66518A : 0xFF393545);
         g.outline(x, y, w, h, hovered ? 0xFFD9B8FF : 0xFF777184);
