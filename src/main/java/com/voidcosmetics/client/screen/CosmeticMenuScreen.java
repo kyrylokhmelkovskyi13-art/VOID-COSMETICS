@@ -4,6 +4,7 @@ import com.voidcosmetics.client.VoidCosmeticsClient;
 import com.voidcosmetics.client.config.CosmeticType;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 public final class CosmeticMenuScreen extends Screen {
@@ -90,9 +91,9 @@ public final class CosmeticMenuScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button != 0) return super.mouseClicked(mouseX, mouseY, button);
-        int mx = (int) mouseX, my = (int) mouseY;
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        if (event.button() != 0) return super.mouseClicked(event, doubleClick);
+        int mx = (int) event.x(), my = (int) event.y();
         int buttonY = panelY + 338;
         if (inside(mx, my, panelX + 14, buttonY, 124, 20)) {
             VoidCosmeticsClient.CONFIG.setSelected(CosmeticType.NONE);
@@ -110,7 +111,7 @@ public final class CosmeticMenuScreen extends Screen {
                 return true;
             }
         }
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     private boolean inside(int mx, int my, int x, int y, int w, int h) {
