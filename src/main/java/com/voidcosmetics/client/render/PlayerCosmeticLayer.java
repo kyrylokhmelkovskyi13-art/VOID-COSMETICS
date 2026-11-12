@@ -48,14 +48,24 @@ public final class PlayerCosmeticLayer extends RenderLayer<AvatarRenderState, Pl
     // Coordinates below are block units relative to the selected model part.
     // Head local origin is at the neck; negative Y points upward and negative Z faces forward.
     private static void wings(PoseStack s, SubmitNodeCollector c, ModelPart body, boolean angel) {
-        int a=angel?0xFFFFD86B:0xFF6B173F, b=angel?0xFFFFF2C2:0xFFB52C52, edge=angel?0xFFFFFFFF:0xFF241027;
-        draw(s,c,body,(v,p)->{for(int side:new int[]{-1,1}){float x=side;
-            box(v,p,x*.12F,-.18F,.08F,x*.34F,.04F,.18F,edge);
-            box(v,p,x*.28F,-.04F,.095F,x*.56F,.22F,.175F,a);
-            box(v,p,x*.43F,-.18F,.10F,x*.72F,.06F,.17F,b);
-            box(v,p,x*.58F,-.33F,.105F,x*.91F,-.08F,.165F,a);
-            box(v,p,x*.69F,-.46F,.11F,x*.98F,-.23F,.16F,b);
-        }});
+        int base=angel?0xFFFFE7A0:0xFF4A1734;
+        int a=angel?0xFFFFD86B:0xFF6B173F;
+        int b=angel?0xFFFFF2C2:0xFFB52C52;
+        int edge=angel?0xFFFFFFFF:0xFF241027;
+        draw(s,c,body,(v,p)->{
+            // A shared back plate keeps both wings visibly attached to the torso.
+            box(v,p,-.24F,-.16F,.10F,.24F,.12F,.23F,base);
+            for(int side:new int[]{-1,1}) {
+                // Overlapping stepped feathers form one continuous wing silhouette.
+                box(v,p,side*.10F,-.12F,.12F,side*.34F,.12F,.24F,edge);
+                box(v,p,side*.22F,-.20F,.13F,side*.52F,.08F,.235F,a);
+                box(v,p,side*.36F,-.30F,.14F,side*.68F,.00F,.23F,b);
+                box(v,p,side*.50F,-.40F,.145F,side*.82F,-.10F,.225F,a);
+                box(v,p,side*.62F,-.47F,.15F,side*.91F,-.20F,.22F,b);
+                // Lower feather overlaps the middle section instead of floating below it.
+                box(v,p,side*.36F,-.26F,.145F,side*.70F,-.08F,.235F,edge);
+            }
+        });
     }
 
     private static void horns(PoseStack s,SubmitNodeCollector c,ModelPart head) {
